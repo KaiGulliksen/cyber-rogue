@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TileDefinition" load_steps=4 format=3 uid="uid://ddc61qex18xvv"]
+
+[ext_resource type="Script" uid="uid://br5fklk3tofj3" path="res://src/Map/tile_definition.gd" id="1_qippb"]
+[ext_resource type="Texture2D" uid="uid://bqtva2dk4it0l" path="res://src/Assets/URLTileSet.png" id="2_utrqk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnku5"]
+atlas = ExtResource("2_utrqk")
+region = Rect2(16, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_qippb")
+texture = SubResource("AtlasTexture_wnku5")
+metadata/_custom_type_script = "uid://br5fklk3tofj3"
