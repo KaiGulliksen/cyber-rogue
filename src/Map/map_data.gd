@@ -21,11 +21,8 @@ func _setup_tiles() -> void:
 	for y in height:
 		for x in width:
 			var tile_position := Vector2i(x, y)
-			var tile := Tile.new(tile_position, tile_types.floor)
+			var tile := Tile.new(tile_position, tile_types.wall)
 			tiles.append(tile)
-	for x in range(30, 34):
-		var tile: Tile = get_tile(Vector2i(x, 22))
-		tile.set_tile_type(tile_types.wall)
 
 func get_tile(grid_position: Vector2i) -> Tile:
 	var tile_index: int = grid_to_index(grid_position)
