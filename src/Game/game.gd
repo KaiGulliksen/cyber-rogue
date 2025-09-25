@@ -13,5 +13,5 @@ func _ready() -> void:
 	player = Entity.new(player_start_pos, player_definition)
 	entities.add_child(player)
 	var npc := Entity.new(player_start_pos + Vector2i.RIGHT, player_definition)
-	npc.modulate = Color.ORANGE_RED
+	npc.modulate = Color.GREEN
 	entities.add_child(npc)
