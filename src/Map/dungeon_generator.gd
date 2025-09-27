@@ -10,14 +10,23 @@ extends Node
 @export var room_max_size: int = 10
 @export var room_min_size: int = 6
 
+@export_category("Monsters RNG")
+@export var max_monsters_per_room = 2
+
 var _rng := RandomNumberGenerator.new()
+
+
+const entity_types = {
+	"zombie": preload("res://src/Assets/Definitions/Entities/Actors/entity_definition_zombie.tres"),
+}
 
 
 func _ready() -> void:
 	_rng.randomize()
 
-func generate_dungeon(player: Entity) -> MapData:
+func generate_dungeon(player:Entity) -> MapData:
 	var dungeon := MapData.new(map_width, map_height)
+	dungeon.entities.append(player)
 	
 	var rooms: Array[Rect2i] = []
 	
@@ -45,6 +54,8 @@ func generate_dungeon(player: Entity) -> MapData:
 			player.grid_position = new_room.get_center()
 		else:
 			_tunnel_between(dungeon, rooms.back().get_center(), new_room.get_center())
+		
+		_place_entities(dungeon, new_room)
 		
 		rooms.append(new_room)
 	
@@ -80,3 +91,25 @@ func _carve_room(dungeon: MapData, room: Rect2i) -> void:
 	for y in range(inner.position.y, inner.end.y + 1):
 		for x in range(inner.position.x, inner.end.x + 1):
 			_carve_tile(dungeon, x, y)
+
+func _place_entities(dungeon: MapData, room: Rect2i) -> void:
+	var number_of_monsters: int = _rng.randi_range(0, max_monsters_per_room)
+	
+	for _i in number_of_monsters:
+		var x: int = _rng.randi_range(room.position.x + 1, room.end.x - 1)
+		var y: int = _rng.randi_range(room.position.y + 1, room.end.y - 1)
+		var new_entity_position := Vector2i(x, y)
+		
+		var can_place = true
+		for entity in dungeon.entities:
+			if entity.grid_position == new_entity_position:
+				can_place = false
+				break
+		
+		if can_place:
+			var new_entity: Entity
+			if _rng.randf() < 0.8:
+				new_entity = Entity.new(new_entity_position, entity_types.zombie)
+			else:
+				new_entity = Entity.new(new_entity_position, entity_types.zombie)
+			dungeon.entities.append(new_entity)

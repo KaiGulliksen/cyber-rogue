@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EntityDefinition" load_steps=4 format=3 uid="uid://cafj6611hbivd"]
+
+[ext_resource type="Script" uid="uid://b68okk0jd78d1" path="res://src/Entities/entity_definition.gd" id="1_od1tu"]
+[ext_resource type="Texture2D" uid="uid://bhibnw04nbann" path="res://src/Assets/monochrome_packed.png" id="2_oa5q8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ammli"]
+atlas = ExtResource("2_oa5q8")
+region = Rect2(464, 96, 16, 16)
+
+[resource]
+script = ExtResource("1_od1tu")
+name = "Zombie"
+texture = SubResource("AtlasTexture_ammli")
+color = Color(0, 0.5254902, 0, 1)
+metadata/_custom_type_script = "uid://b68okk0jd78d1"
