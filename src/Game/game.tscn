@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" uid="uid://ch6wx3vug6xc1" path="res://src/Game/game.gd" id="1_k6qo2"]
 [ext_resource type="Script" uid="uid://c0adwcdl8q8i6" path="res://src/Map/map.gd" id="3_bob6j"]
-[ext_resource type="Script" uid="uid://c5wouml567ldv" path="res://src/Game/event_handler.gd" id="3_sag4g"]
+[ext_resource type="Script" uid="uid://c5wouml567ldv" path="res://src/Game/input_handler.gd" id="3_sag4g"]
 [ext_resource type="Script" uid="uid://cdk3x3y8a8w4s" path="res://src/Map/dungeon_generator.gd" id="4_bob6j"]
 [ext_resource type="Script" uid="uid://diqi78qwrvwtw" path="res://src/Map/field_of_view.gd" id="5_3s8ir"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_k6qo2")
 
-[node name="EventHandler" type="Node" parent="."]
+[node name="InputHandler" type="Node" parent="."]
 script = ExtResource("3_sag4g")
 
 [node name="Map" type="Node2D" parent="."]

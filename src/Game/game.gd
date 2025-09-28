@@ -5,23 +5,23 @@ const player_definition: EntityDefinition = preload("res://src/Assets/Definition
 const tile_size = 16
 
 @onready var player: Entity
-@onready var event_handler: EventHandler = $EventHandler
+@onready var input_handler: InputHandler = $InputHandler
 @onready var map: Map = $Map
 @onready var camera: Camera2D = $Camera2D
 
 
 func _ready() -> void:
-	player = Entity.new(Vector2i.ZERO, player_definition)
+	player = Entity.new(null, Vector2i.ZERO, player_definition)
 	remove_child(camera)
 	player.add_child(camera)
 	map.generate(player)
 	map.update_fov(player.grid_position)
 
 func _physics_process(_delta: float) -> void:
-	var action: Action = event_handler.get_action()
+	var action: Action = input_handler.get_action(player)
 	if action:
 		var previous_player_position: Vector2i = player.grid_position
-		action.perform(self, player)
+		action.perform()
 		_handle_enemy_turns()
 		map.update_fov(player.grid_position)
 
