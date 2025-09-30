@@ -1,20 +1,30 @@
 class_name InputHandler
 extends Node
 
+const directions = {
+	"move_up": Vector2i.UP,
+	"move_down": Vector2i.DOWN,
+	"move_left": Vector2i.LEFT,
+	"move_right": Vector2i.RIGHT,
+	"move_up_left": Vector2i.UP + Vector2i.LEFT,
+	"move_up_right": Vector2i.UP + Vector2i.RIGHT,
+	"move_down_left": Vector2i.DOWN + Vector2i.LEFT,
+	"move_down_right": Vector2i.DOWN + Vector2i.RIGHT,
+}
+
 
 func get_action(player: Entity) -> Action:
 	var action: Action = null
 	
-	if Input.is_action_just_pressed("ui_up"):
-		action = BumpAction.new(player, 0, -1)
-	elif Input.is_action_just_pressed("ui_down"):
-		action = BumpAction.new(player, 0, 1)
-	elif Input.is_action_just_pressed("ui_left"):
-		action = BumpAction.new(player, -1, 0)
-	elif Input.is_action_just_pressed("ui_right"):
-		action = BumpAction.new(player, 1, 0)
+	for direction in directions:
+		if Input.is_action_just_pressed(direction):
+			var offset: Vector2i = directions[direction]
+			action = BumpAction.new(player, offset.x, offset.y)
 	
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("wait"):
+		action = WaitAction.new(player)
+	
+	if Input.is_action_just_pressed("quit"):
 		action = EscapeAction.new(player)
 	
 	return action

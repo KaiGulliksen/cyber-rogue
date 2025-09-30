@@ -1,6 +1,11 @@
 class_name DungeonGenerator
 extends Node
 
+
+const entity_types = {
+	"zombie": preload("res://src/Assets/Definitions/Entities/Actors/entity_definition_zombie.tres"),
+}
+
 @export_category("Map Dimensions")
 @export var map_width: int = 80
 @export var map_height: int = 45
@@ -13,16 +18,13 @@ extends Node
 @export_category("Monsters RNG")
 @export var max_monsters_per_room = 2
 
+
 var _rng := RandomNumberGenerator.new()
-
-
-const entity_types = {
-	"zombie": preload("res://src/Assets/Definitions/Entities/Actors/entity_definition_zombie.tres"),
-}
 
 
 func _ready() -> void:
 	_rng.randomize()
+
 
 func generate_dungeon(player:Entity) -> MapData:
 	var dungeon := MapData.new(map_width, map_height, player)
@@ -41,8 +43,7 @@ func generate_dungeon(player:Entity) -> MapData:
 		
 		var has_intersections := false
 		for room in rooms:
-			# Rect2i.intersects() checks for overlapping points. In order to allow bordering rooms one room is shrunk.
-			if room.intersects(new_room.grow(-1)):
+			if room.intersects(new_room):
 				has_intersections = true
 				break
 		if has_intersections:
@@ -60,20 +61,31 @@ func generate_dungeon(player:Entity) -> MapData:
 		
 		rooms.append(new_room)
 	
+	dungeon.setup_pathfinding()
 	return dungeon
+
+
+func _carve_room(dungeon: MapData, room: Rect2i) -> void:
+	var inner: Rect2i = room.grow(-1)
+	for y in range(inner.position.y, inner.end.y + 1):
+		for x in range(inner.position.x, inner.end.x + 1):
+			_carve_tile(dungeon, x, y)
+
 
 func _tunnel_horizontal(dungeon: MapData, y: int, x_start: int, x_end: int) -> void:
 	var x_min: int = mini(x_start, x_end)
 	var x_max: int = maxi(x_start, x_end)
 	for x in range(x_min, x_max + 1):
 		_carve_tile(dungeon, x, y)
-		
+
+
 func _tunnel_vertical(dungeon: MapData, x: int, y_start: int, y_end: int) -> void:
 	var y_min: int = mini(y_start, y_end)
 	var y_max: int = maxi(y_start, y_end)
 	for y in range(y_min, y_max + 1):
 		_carve_tile(dungeon, x, y)
-		
+
+
 func _tunnel_between(dungeon: MapData, start: Vector2i, end: Vector2i) -> void:
 	if _rng.randf() < 0.5:
 		_tunnel_horizontal(dungeon, start.y, start.x, end.x)
@@ -82,16 +94,12 @@ func _tunnel_between(dungeon: MapData, start: Vector2i, end: Vector2i) -> void:
 		_tunnel_vertical(dungeon, start.x, start.y, end.y)
 		_tunnel_horizontal(dungeon, end.y, start.x, end.x)
 
+
 func _carve_tile(dungeon: MapData, x: int, y: int) -> void:
 		var tile_position = Vector2i(x, y)
 		var tile: Tile = dungeon.get_tile(tile_position)
 		tile.set_tile_type(dungeon.tile_types.floor)
 
-func _carve_room(dungeon: MapData, room: Rect2i) -> void:
-	var inner: Rect2i = room.grow(-1)
-	for y in range(inner.position.y, inner.end.y + 1):
-		for x in range(inner.position.x, inner.end.x + 1):
-			_carve_tile(dungeon, x, y)
 
 func _place_entities(dungeon: MapData, room: Rect2i) -> void:
 	var number_of_monsters: int = _rng.randi_range(0, max_monsters_per_room)
