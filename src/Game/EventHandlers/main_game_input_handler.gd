@@ -1,5 +1,4 @@
-class_name InputHandler
-extends Node
+extends BaseInputHandler
 
 const directions = {
 	"move_up": Vector2i.UP,

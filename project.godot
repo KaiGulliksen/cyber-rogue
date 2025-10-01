@@ -15,6 +15,10 @@ run/main_scene="uid://k0xhib4wdaii"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SignalBus="*res://src/Utils/signal_bus.gd"
+
 [input]
 
 move_up={
