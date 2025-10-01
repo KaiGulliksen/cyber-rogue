@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://k0xhib4wdaii"]
+[gd_scene load_steps=16 format=3 uid="uid://k0xhib4wdaii"]
 
 [ext_resource type="Script" uid="uid://ch6wx3vug6xc1" path="res://src/Game/game.gd" id="1_k6qo2"]
 [ext_resource type="Script" uid="uid://cub3popa4bn2e" path="res://src/Game/EventHandlers/input_handler.gd" id="2_le6wr"]
@@ -7,31 +7,136 @@
 [ext_resource type="Script" uid="uid://c5wouml567ldv" path="res://src/Game/EventHandlers/main_game_input_handler.gd" id="3_sag4g"]
 [ext_resource type="Script" uid="uid://cdk3x3y8a8w4s" path="res://src/Map/dungeon_generator.gd" id="4_bob6j"]
 [ext_resource type="Script" uid="uid://diqi78qwrvwtw" path="res://src/Map/field_of_view.gd" id="5_3s8ir"]
+[ext_resource type="Texture2D" uid="uid://bqtva2dk4it0l" path="res://src/Assets/URLTileSet.png" id="5_lx5th"]
+[ext_resource type="Script" uid="uid://cmt06t0qnbo5h" path="res://src/GUI/hp_display.gd" id="9_mkl7w"]
+[ext_resource type="FontFile" uid="uid://bj0uxk1jeqvw2" path="res://src/Assets/Fonts/SourceCodePro-Regular.ttf" id="10_drysr"]
 
-[node name="Game" type="Node2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_lx5th"]
+atlas = ExtResource("5_lx5th")
+region = Rect2(0, 240, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0qd4d"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = SubResource("AtlasTexture_lx5th")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ysswf"]
+bg_color = Color(0.96862745, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4te78"]
+bg_color = Color(0.2747593, 0.72519183, 0.3288508, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_x8pff"]
+font = ExtResource("10_drysr")
+font_size = 20
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="InterfaceRoot" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/HBoxContainer/SubViewportContainer"]
+disable_3d = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(1230, 766)
+render_target_update_mode = 4
+
+[node name="Game" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport"]
 script = ExtResource("1_k6qo2")
 
-[node name="InputHandler" type="Node" parent="."]
+[node name="InputHandler" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game"]
 script = ExtResource("2_le6wr")
 
-[node name="MainGameInputHandler" type="Node" parent="InputHandler"]
+[node name="MainGameInputHandler" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/InputHandler"]
 script = ExtResource("3_sag4g")
 
-[node name="GameOverInputHandler" type="Node" parent="InputHandler"]
+[node name="GameOverInputHandler" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/InputHandler"]
 script = ExtResource("3_7m6cs")
 
-[node name="Map" type="Node2D" parent="."]
+[node name="Map" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game"]
 script = ExtResource("3_bob6j")
 
-[node name="DungeonGenerator" type="Node" parent="Map"]
+[node name="DungeonGenerator" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/Map"]
 script = ExtResource("4_bob6j")
 
-[node name="FieldOfView" type="Node" parent="Map"]
+[node name="FieldOfView" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/Map"]
 script = ExtResource("5_3s8ir")
 
-[node name="Tiles" type="Node2D" parent="Map"]
+[node name="Tiles" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/Map"]
 
-[node name="Entities" type="Node2D" parent="Map"]
+[node name="Entities" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/Map"]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game"]
 zoom = Vector2(2, 2)
+
+[node name="InfoBar" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+theme_override_constants/separation = 0
+
+[node name="StatsPanel" type="PanelContainer" parent="VBoxContainer/HBoxContainer/InfoBar"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_0qd4d")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/InfoBar/StatsPanel"]
+layout_mode = 2
+
+[node name="HpDisplay" type="MarginContainer" parent="VBoxContainer/HBoxContainer/InfoBar/StatsPanel/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("9_mkl7w")
+
+[node name="HpBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer/InfoBar/StatsPanel/VBoxContainer/HpDisplay"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_ysswf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4te78")
+step = 1.0
+show_percentage = false
+
+[node name="HpLabel" type="Label" parent="VBoxContainer/HBoxContainer/InfoBar/StatsPanel/VBoxContainer/HpDisplay"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+label_settings = SubResource("LabelSettings_x8pff")
+
+[node name="MessagesPanel" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+theme_override_styles/panel = SubResource("StyleBoxTexture_0qd4d")
+
+[connection signal="player_created" from="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game" to="VBoxContainer/HBoxContainer/InfoBar/StatsPanel/VBoxContainer/HpDisplay" method="initialize"]
