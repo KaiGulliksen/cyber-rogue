@@ -6,7 +6,9 @@ const tile_types = {
 	"wall": preload("res://src/Assets/Definitions/Tiles/tile_definition_wall.tres"),
 }
 
+
 const entity_pathfinding_weight = 10.0
+
 
 var width: int
 var height: int
