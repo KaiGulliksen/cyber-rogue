@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bla4g7hm6mg0a"]
+
+[ext_resource type="FontFile" uid="uid://bj0uxk1jeqvw2" path="res://src/Assets/Fonts/SourceCodePro-Regular.ttf" id="1_quabe"]
+
+[resource]
+font = ExtResource("1_quabe")
+font_size = 20
