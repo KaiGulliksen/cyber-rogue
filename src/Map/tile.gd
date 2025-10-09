@@ -1,7 +1,10 @@
 class_name Tile
 extends Sprite2D
 
+
 var _definition: TileDefinition
+var tile_key: TileDB.TileName
+
 
 var is_explored: bool = false:
 	set(value):
@@ -17,15 +20,16 @@ var is_in_view: bool = false:
 			is_explored = true
 
 
-func _init(grid_position: Vector2i, tile_definition: TileDefinition) -> void:
+func _init(grid_position: Vector2i, p_tile_key: TileDB.TileName) -> void:
 	visible = false
 	centered = false
 	position = Grid.grid_to_world(grid_position)
-	set_tile_type(tile_definition)
+	set_tile_type(p_tile_key)
 
 
-func set_tile_type(tile_definition: TileDefinition) -> void:
-	_definition = tile_definition
+func set_tile_type(p_tile_key: TileDB.TileName) -> void:
+	self.tile_key = p_tile_key
+	_definition = TileDB.tile_types[p_tile_key]
 	texture = _definition.texture
 	modulate = _definition.color_dark
 
