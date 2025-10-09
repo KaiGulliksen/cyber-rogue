@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="EntityDefinition" load_steps=6 format=3 uid="uid://s3ksfbc4y47e"]
+[gd_resource type="Resource" script_class="EntityDefinition" load_steps=7 format=3 uid="uid://s3ksfbc4y47e"]
 
 [ext_resource type="Script" uid="uid://b68okk0jd78d1" path="res://src/Entities/entity_definition.gd" id="1_eyv76"]
+[ext_resource type="Texture2D" uid="uid://bp0py8hbjura4" path="res://src/Assets/Resources/default_death_texture.tres" id="1_t5i0r"]
 [ext_resource type="Script" uid="uid://bktttlrow6lxq" path="res://src/Entities/Actors/Components/ComponentDefinitions/fighter_component_definition.gd" id="1_u16gx"]
 [ext_resource type="Texture2D" uid="uid://bhibnw04nbann" path="res://src/Assets/monochrome_packed.png" id="2_p6shd"]
 
