@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://k0xhib4wdaii"]
+[gd_scene load_steps=19 format=3 uid="uid://k0xhib4wdaii"]
 
 [ext_resource type="Script" uid="uid://ch6wx3vug6xc1" path="res://src/Game/game.gd" id="1_k6qo2"]
 [ext_resource type="Script" uid="uid://cub3popa4bn2e" path="res://src/Game/EventHandlers/input_handler.gd" id="2_le6wr"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://diqi78qwrvwtw" path="res://src/Map/field_of_view.gd" id="5_3s8ir"]
 [ext_resource type="Texture2D" uid="uid://bqtva2dk4it0l" path="res://src/Assets/URLTileSet.png" id="5_lx5th"]
 [ext_resource type="Script" uid="uid://cvqomq2kla3vf" path="res://src/Game/EventHandlers/history_viewer_input_handler.gd" id="5_ysswf"]
+[ext_resource type="Script" uid="uid://bu78jrrjoi8ca" path="res://src/Map/hub.gd" id="9_4te78"]
 [ext_resource type="Script" uid="uid://cmt06t0qnbo5h" path="res://src/GUI/hp_display.gd" id="9_mkl7w"]
 [ext_resource type="FontFile" uid="uid://bj0uxk1jeqvw2" path="res://src/Assets/Fonts/SourceCodePro-Regular.ttf" id="10_drysr"]
 [ext_resource type="Script" uid="uid://ccd2lrlk7xh01" path="res://src/GUI/message_log.gd" id="11_drysr"]
@@ -105,6 +106,7 @@ script = ExtResource("5_3s8ir")
 [node name="Entities" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/Map"]
 
 [node name="Hub" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game"]
+script = ExtResource("9_4te78")
 
 [node name="Camera2D" type="Camera2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game"]
 zoom = Vector2(2, 2)
