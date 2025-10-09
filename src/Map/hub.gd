@@ -11,14 +11,14 @@ var map_data: MapData
 
 
 func setup_area(player: Entity) -> void:
-	initialize_map_data(hub_width, hub_height, player)
+	#initialize_map_data(hub_width, hub_height, player)
 	_load_tiles_from_tilemap()
 	
 	player.grid_position = player_spawn_position
-	add_entity(player)
+	#add_entity(player)
 	
 	map_data.setup_pathfinding()
-	update_fov(player.grid_position)
+
 
 func _load_tiles_from_tilemap() -> void:
 	# Read the existing tilemap and create Tile objects in map_data
@@ -47,8 +47,3 @@ func _load_tiles_from_tilemap() -> void:
 			
 			# Hide the tilemap tile since we're using our own Tile objects
 			# Or you can keep the tilemap visible for visual purposes
-
-func enter_portal() -> void:
-	var player: Entity = map_data.player
-	remove_entity(player)
-	cleanup_area()
