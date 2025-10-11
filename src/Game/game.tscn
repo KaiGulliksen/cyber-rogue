@@ -108,6 +108,10 @@ script = ExtResource("5_3s8ir")
 [node name="Hub" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game"]
 script = ExtResource("9_4te78")
 
+[node name="Entities" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/Hub"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/Hub"]
+
 [node name="Camera2D" type="Camera2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game"]
 zoom = Vector2(2, 2)
 
