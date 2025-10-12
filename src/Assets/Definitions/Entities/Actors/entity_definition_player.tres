@@ -22,4 +22,5 @@ name = "Player"
 texture = SubResource("AtlasTexture_u16gx")
 fighter_definition = SubResource("Resource_t5i0r")
 ai_type = 1
+inventory_capacity = 26
 metadata/_custom_type_script = "uid://b68okk0jd78d1"

@@ -25,6 +25,7 @@ var map_data: MapData
 var fighter_component: FighterComponent
 var ai_component: BaseAIComponent
 var consumable_component: ConsumableComponent
+var inventory_component: InventoryComponent
 
 
 func _init(map_data: MapData, start_position: Vector2i, entity_definition: EntityDefinition) -> void:
@@ -51,10 +52,15 @@ func set_entity_type(entity_definition: EntityDefinition) -> void:
 		fighter_component = FighterComponent.new(entity_definition.fighter_definition)
 		add_child(fighter_component)
 		
-	if entity_definition.consumable_definition:
-		if entity_definition.consumable_definition is HealingConsumableComponentDefinition:
-			consumable_component = HealingConsumableComponent.new(entity_definition.consumable_definition)
+	if entity_definition.item_definition:
+		if entity_definition.item_definition is HealingConsumableComponentDefinition:
+			consumable_component = HealingConsumableComponent.new(entity_definition.item_definition)
 			add_child(consumable_component)
+			
+	if entity_definition.inventory_capacity > 0:
+		inventory_component = InventoryComponent.new()
+		inventory_component.capacity = entity_definition.inventory_capacity
+		add_child(inventory_component)
 
 
 func move(move_offset: Vector2i) -> void:

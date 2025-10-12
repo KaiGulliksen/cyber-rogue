@@ -11,7 +11,7 @@ const directions = {
 	"move_down_right": Vector2i.DOWN + Vector2i.RIGHT,
 }
 
-const inventory_menu_scene = preload("res://src/GUI/Inventory/inventory_menu.gd")
+const inventory_menu_scene = preload("res://src/GUI/Inventory/Inventory.tscn")
 
 func get_action(player: Entity) -> Action:
 	var action: Action = null

@@ -4,9 +4,10 @@
 [ext_resource type="Script" uid="uid://b68okk0jd78d1" path="res://src/Entities/entity_definition.gd" id="1_qpss7"]
 [ext_resource type="Texture2D" uid="uid://bqtva2dk4it0l" path="res://src/Assets/URLTileSet.png" id="3_6kufk"]
 
-[sub_resource type="Resource" id="Resource_0jc8d"]
+[sub_resource type="Resource" id="Resource_qfo4e"]
 script = ExtResource("1_qfo4e")
 healing_amount = 10
+weight = 0.1
 metadata/_custom_type_script = "uid://che6c1hrmt0na"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ujjd2"]
@@ -18,5 +19,5 @@ script = ExtResource("1_qpss7")
 name = "Stimpak"
 texture = SubResource("AtlasTexture_ujjd2")
 is_blocking_movement = false
-consumable_definition = SubResource("Resource_0jc8d")
+item_definition = SubResource("Resource_qfo4e")
 metadata/_custom_type_script = "uid://b68okk0jd78d1"

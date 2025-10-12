@@ -8,7 +8,7 @@ var capacity: int
 
 func _init() -> void:
 	items = []
-	self.capacity = capacity
+	capacity = 0 
 
 
 # Function for dropping items from the inventory	

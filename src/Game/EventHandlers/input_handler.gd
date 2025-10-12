@@ -21,7 +21,7 @@ func _ready() -> void:
 
 
 func get_action(player: Entity) -> Action:
-	return current_input_handler.get_action(player)
+	return await current_input_handler.get_action(player)
 
 
 func transition_to(input_handler: InputHandlers) -> void:
