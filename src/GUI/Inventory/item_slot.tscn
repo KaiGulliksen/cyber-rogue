@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccj2gvp7f5x7b"]
+
+[ext_resource type="Script" uid="uid://bstlanpxpg0x8" path="res://src/GUI/Inventory/item_slot.gd" id="1_n2neb"]
+
+[node name="ItemSlot" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_n2neb")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="ItemNameLabel" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ItemQuantLabel" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="ItemWeightLabel" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2

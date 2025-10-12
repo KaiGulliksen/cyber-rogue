@@ -1,7 +1,7 @@
 class_name InputHandler
 extends Node
 
-enum InputHandlers {MAIN_GAME, GAME_OVER, HISTORY_VIEWER}
+enum InputHandlers {MAIN_GAME, GAME_OVER, HISTORY_VIEWER, DUMMY}
 
 @export var start_input_handler: InputHandlers
 
@@ -9,6 +9,7 @@ enum InputHandlers {MAIN_GAME, GAME_OVER, HISTORY_VIEWER}
 	InputHandlers.MAIN_GAME: $MainGameInputHandler,
 	InputHandlers.GAME_OVER: $GameOverInputHandler,
 	InputHandlers.HISTORY_VIEWER: $HistoryViewerInputHandler,
+	InputHandlers.DUMMY: $DummyInputHandler,
 }
 
 var current_input_handler: BaseInputHandler
