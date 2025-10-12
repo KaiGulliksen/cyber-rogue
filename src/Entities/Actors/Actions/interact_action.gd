@@ -1,22 +1,25 @@
 class_name InteractAction
 extends Action
 
-func perform() -> void:
+func perform() -> bool:
 	var entity_at_position: Entity = _get_non_actor_entity_at_location(entity.grid_position)
 	
 	if entity_at_position:
 		if entity_at_position.type == Entity.EntityType.PORTAL:
 			_use_portal(entity_at_position)
+			return true
 		else:
 			MessageLog.send_message(
 				"There's nothing to interact with here.",
 				Color.GRAY
 			)
+			return false
 	else:
 		MessageLog.send_message(
 			"There's nothing to interact with here.",
 			Color.GRAY
 		)
+		return false
 
 func _get_non_actor_entity_at_location(location: Vector2i) -> Entity:
 	# Look for entities at this location that aren't actors

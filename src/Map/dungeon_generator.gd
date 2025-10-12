@@ -4,6 +4,7 @@ extends Node
 const entity_types = {
 	## Add your entity types here
 	"zombie": preload("res://src/Assets/Definitions/Entities/Actors/entity_definition_zombie.tres"),
+	"stimpak": preload("res://src/Assets/Definitions/Entities/Items/stimpak_definition.tres"),
 }
 
 @export_category("Map Dimentions")
@@ -14,7 +15,7 @@ const entity_types = {
 @export var walk_iterations: int = 500
 
 @export_category("Entities RNG")
-@export var max_monsters_per_room: int = 2
+@export var max_monsters_per_room: int = 1
 @export var max_items_per_room: int = 2
 
 var _rng := RandomNumberGenerator.new()
@@ -116,6 +117,17 @@ func _place_entities(dungeon: MapData, room: Rect2i) -> void:
 		if not dungeon.is_in_bounds(pos):
 			continue
 		# Add item spawning logic here
+		
+		var can_place = true
+		for entity in dungeon.entities:
+			if entity.grid_position == pos:
+				can_place = false
+				break
+		
+		if can_place:
+			var new_entity: Entity = Entity.new(dungeon, pos, entity_types.stimpak)
+			dungeon.entities.append(new_entity)
+
 		pass
 
 # The new Walker class
