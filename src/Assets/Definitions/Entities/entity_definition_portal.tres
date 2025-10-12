@@ -9,6 +9,7 @@ region = Rect2(0, 240, 16, 16)
 
 [resource]
 script = ExtResource("1_jblm8")
+name = "Portal"
 texture = SubResource("AtlasTexture_0bu7d")
 is_blocking_movement = false
 type = 3
