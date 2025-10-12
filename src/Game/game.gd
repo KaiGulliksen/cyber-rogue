@@ -6,9 +6,14 @@ signal player_created(player)
 const player_definition: EntityDefinition = preload("res://src/Assets/Definitions/Entities/Actors/entity_definition_player.tres")
 const tile_size = 16
 
+enum GameState { HUB, DUNGEON }
+
+var current_state: GameState = GameState.HUB
+
 @onready var player: Entity
 @onready var input_handler: InputHandler = $InputHandler
-@onready var hub: Hub = $Hub  # Changed from map to hub
+@onready var hub: Hub = $Hub
+@onready var map: Map = $Map
 @onready var camera: Camera2D = $Camera2D
 
 
@@ -17,7 +22,12 @@ func _ready() -> void:
 	player_created.emit(player)
 	remove_child(camera)
 	player.add_child(camera)
-	hub.generate(player)  # Changed from map.generate to hub.generate
+	
+	# Hide map initially
+	map.visible = false
+	
+	# Start in hub
+	hub.generate(player)
 	update_fov(player.grid_position)
 	MessageLog.send_message.bind(
 		"Hello and welcome, adventurer, to the hub!",
@@ -41,11 +51,40 @@ func _handle_enemy_turns() -> void:
 
 
 func get_map_data() -> MapData:
-	return hub.map_data  # Changed from map.map_data
+	if current_state == GameState.HUB:
+		return hub.map_data
+	else:
+		return map.map_data
 
 
 func update_fov(player_position: Vector2i) -> void:
-	# You'll need to add a FieldOfView node to the Hub or reuse the Map's one
-	# For now, we can create a simple version
-	for entity in get_map_data().entities:
-		entity.visible = true  # Make all entities visible in the hub for now
+	if current_state == GameState.HUB:
+		# In hub, make everything visible
+		for entity in get_map_data().entities:
+			entity.visible = true
+	else:
+		# In dungeon, use FOV
+		map.update_fov(player_position)
+
+
+func transition_to_dungeon() -> void:
+	MessageLog.send_message(
+		"You descend into the dungeon...",
+		GameColors.WELCOME_TEXT
+	)
+	
+	# Remove player from hub
+	player.get_parent().remove_child(player)
+	
+	# Hide hub, show map
+	hub.visible = false
+	map.visible = true
+	
+	# Generate dungeon
+	map.generate(player)
+	
+	# Update state
+	current_state = GameState.DUNGEON
+	
+	# Update FOV for new location
+	update_fov(player.grid_position)

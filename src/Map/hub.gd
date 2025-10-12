@@ -1,9 +1,12 @@
 class_name Hub
 extends Node2D
 
+const portal_definition: EntityDefinition = preload("res://src/Assets/Definitions/Entities/entity_definition_portal.tres")
+
 @export var hub_width: int = 74
 @export var hub_height: int = 74  
 @export var player_spawn_position: Vector2i = Vector2i(35, 20)
+@export var portal_position: Vector2i = Vector2i(37, 25)  # Adjust as needed
 
 var map_data: MapData
 var tile_map: Tile
@@ -21,6 +24,11 @@ func generate(player: Entity) -> void:
 	player.map_data = map_data
 	map_data.entities.append(player)
 	entities.add_child(player)
+	
+	# Add portal
+	var portal := Entity.new(map_data, portal_position, portal_definition)
+	map_data.entities.append(portal)
+	entities.add_child(portal)
 	
 	map_data.setup_pathfinding()
 

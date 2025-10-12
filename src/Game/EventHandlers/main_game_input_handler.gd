@@ -23,6 +23,10 @@ func get_action(player: Entity) -> Action:
 	if Input.is_action_just_pressed("wait"):
 		action = WaitAction.new(player)
 	
+	if Input.is_action_just_pressed("interact"):
+		print("Interacting!")
+		action = InteractAction.new(player)
+	
 	if Input.is_action_just_pressed("view_history"):
 		get_parent().transition_to(InputHandler.InputHandlers.HISTORY_VIEWER)
 	

@@ -95,3 +95,10 @@ func get_actor_at_location(location: Vector2i) -> Entity:
 		if actor.grid_position == location:
 			return actor
 	return null
+
+
+func get_entity_at_location(location: Vector2i) -> Entity:
+	for entity in entities:
+		if entity.grid_position == location:
+			return entity
+	return null

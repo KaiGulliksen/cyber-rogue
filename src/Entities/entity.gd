@@ -2,7 +2,7 @@ class_name Entity
 extends Sprite2D
 
 enum AIType {NONE, HOSTILE}
-enum EntityType {CORPSE, ITEM, ACTOR}
+enum EntityType {CORPSE, ITEM, ACTOR, PORTAL}
 
 
 var grid_position: Vector2i:
