@@ -1,7 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://e2faos2k10y1"]
+[gd_scene load_steps=6 format=3 uid="uid://e2faos2k10y1"]
 
 [ext_resource type="Script" uid="uid://c60tlksibrli7" path="res://src/GUI/Inventory/inventory_menu.gd" id="1_0v6sc"]
 [ext_resource type="FontFile" uid="uid://bj0uxk1jeqvw2" path="res://src/Assets/Fonts/SourceCodePro-Regular.ttf" id="1_jr6je"]
+[ext_resource type="Texture2D" uid="uid://bqtva2dk4it0l" path="res://src/Assets/URLTileSet.png" id="2_c3fg2"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_83v52"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_c3fg2")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(0, 240, 16, 16)
 
 [sub_resource type="LabelSettings" id="LabelSettings_kfanr"]
 font = ExtResource("1_jr6je")
@@ -32,6 +45,7 @@ size_flags_vertical = 3
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_83v52")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2
@@ -46,6 +60,7 @@ vertical_alignment = 1
 [node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_83v52")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer2"]
 layout_mode = 2
