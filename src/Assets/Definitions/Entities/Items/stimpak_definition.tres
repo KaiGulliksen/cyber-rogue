@@ -19,5 +19,6 @@ script = ExtResource("1_qpss7")
 name = "Stimpak"
 texture = SubResource("AtlasTexture_ujjd2")
 is_blocking_movement = false
+type = 1
 item_definition = SubResource("Resource_qfo4e")
 metadata/_custom_type_script = "uid://b68okk0jd78d1"
