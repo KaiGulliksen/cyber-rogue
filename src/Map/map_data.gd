@@ -16,6 +16,8 @@ var tiles: Array[Tile]
 var entities: Array[Entity]
 var player: Entity
 var pathfinder: AStarGrid2D
+var current_floor: int = 0
+var down_stair_location: Vector2i
 
 
 func _init(map_width: int, map_height: int, player: Entity) -> void:

@@ -33,12 +33,16 @@ func _carve_tile(dungeon: MapData, x: int, y: int) -> void:
 	if tile:
 		tile.set_tile_type(TileDB.TileName.FLOOR1)
 
-func generate_dungeon(player: Entity) -> MapData:
+func generate_dungeon(player: Entity, current_floor: int) -> MapData:
 	var dungeon := MapData.new(map_width, map_height, player)
+	
+	dungeon.current_floor = current_floor
 	dungeon.entities.append(player)
 
 	var walker = Walker.new(Vector2(map_width / 2, map_height / 2), Rect2(1, 1, map_width - 2, map_height - 2), _rng)
 	var floor_tiles_vector2 = walker.walk(walk_iterations)
+	
+	var last_room_center = walker.get_end_room_center()
 	
 	var floor_tiles: Array[Vector2i] = []
 	for pos in floor_tiles_vector2:
@@ -63,7 +67,11 @@ func generate_dungeon(player: Entity) -> MapData:
 	
 	# The new walker creates rooms, we can use them to place entities.
 	_place_all_entities(dungeon, walker.rooms)
-
+	
+	dungeon.down_stair_location = last_room_center
+	var down_tile: Tile = dungeon.get_tile(last_room_center)
+	down_tile.set_tile_type(TileDB.TileName.DOWNSTAIR)
+	
 	dungeon.setup_pathfinding()
 	return dungeon
 
@@ -208,3 +216,17 @@ class Walker:
 			if starting_position.distance_to(room.position) > starting_position.distance_to(end_room.position):
 				end_room = room
 		return end_room
+
+
+	func get_end_room_center() -> Vector2i:
+		var end_room = get_end_room()
+		if end_room == null:
+			return Vector2i.ZERO
+	
+		var center = Vector2(
+			end_room.position.x + end_room.size.x / 2.0,
+			end_room.position.y + end_room.size.y / 2.0
+		)
+	# Round to nearest integer
+		center = center.round()
+		return Vector2i(center.x, center.y)
