@@ -4,6 +4,7 @@ extends Component
 
 var items: Array[Entity]
 var capacity: int
+var map_data: MapData
 
 
 func _init() -> void:
