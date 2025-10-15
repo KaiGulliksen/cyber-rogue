@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://k0xhib4wdaii"]
+[gd_scene load_steps=25 format=4 uid="uid://k0xhib4wdaii"]
 
 [ext_resource type="Script" uid="uid://ch6wx3vug6xc1" path="res://src/Game/game.gd" id="1_k6qo2"]
 [ext_resource type="Script" uid="uid://cub3popa4bn2e" path="res://src/Game/EventHandlers/input_handler.gd" id="2_le6wr"]
@@ -15,6 +15,7 @@
 [ext_resource type="FontFile" uid="uid://bj0uxk1jeqvw2" path="res://src/Assets/Fonts/SourceCodePro-Regular.ttf" id="10_drysr"]
 [ext_resource type="PackedScene" uid="uid://bisb1o37p4pck" path="res://src/GUI/Reticle/reticle.tscn" id="10_muykf"]
 [ext_resource type="Script" uid="uid://ccd2lrlk7xh01" path="res://src/GUI/message_log.gd" id="11_drysr"]
+[ext_resource type="Script" uid="uid://bd2sbqd7pn1ja" path="res://src/GUI/dungeon_floor_label.gd" id="15_adbi8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4te78"]
 texture = ExtResource("5_lx5th")
@@ -61,6 +62,10 @@ font = ExtResource("10_drysr")
 font_size = 20
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lr6s2"]
+font = ExtResource("10_drysr")
+font_size = 20
 
 [node name="InterfaceRoot" type="Control"]
 layout_mode = 3
@@ -179,6 +184,11 @@ layout_mode = 2
 size_flags_horizontal = 4
 label_settings = SubResource("LabelSettings_x8pff")
 
+[node name="DungeonFloorLabel" type="Label" parent="VBoxContainer/HBoxContainer/InfoBar/StatsPanel/VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_lr6s2")
+script = ExtResource("15_adbi8")
+
 [node name="MessagesPanel" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -197,3 +207,4 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [connection signal="player_created" from="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game" to="VBoxContainer/HBoxContainer/InfoBar/StatsPanel/VBoxContainer/HpDisplay" method="initialize"]
+[connection signal="dungeon_floor_changed" from="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/EngineeringMap" to="VBoxContainer/HBoxContainer/InfoBar/StatsPanel/VBoxContainer/DungeonFloorLabel" method="set_dungeon_floor"]
