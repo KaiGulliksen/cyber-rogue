@@ -115,18 +115,18 @@ message_log_path = NodePath("../../../../../../MessagesPanel/MessageLog")
 [node name="DummyInputHandler" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/InputHandler"]
 script = ExtResource("6_x8pff")
 
-[node name="Map" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game"]
+[node name="EngineeringMap" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game"]
 script = ExtResource("3_bob6j")
 
-[node name="DungeonGenerator" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/Map"]
+[node name="DungeonGenerator" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/EngineeringMap"]
 script = ExtResource("4_bob6j")
 
-[node name="FieldOfView" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/Map"]
+[node name="FieldOfView" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/EngineeringMap"]
 script = ExtResource("5_3s8ir")
 
-[node name="Tiles" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/Map"]
+[node name="Tiles" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/EngineeringMap"]
 
-[node name="Entities" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/Map"]
+[node name="Entities" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/EngineeringMap"]
 
 [node name="Hub" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game"]
 script = ExtResource("9_4te78")

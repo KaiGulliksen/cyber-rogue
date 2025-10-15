@@ -1,4 +1,4 @@
-class_name Map
+class_name EngineeringMap
 extends Node2D
 
 

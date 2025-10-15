@@ -1,11 +1,11 @@
 class_name DungeonGenerator
 extends Node
 
-const entity_types = {
-	## Add your entity types here
-	"zombie": preload("res://src/Assets/Definitions/Entities/Actors/entity_definition_zombie.tres"),
-	"stimpak": preload("res://src/Assets/Definitions/Entities/Items/stimpak_definition.tres"),
-}
+#const entity_types = {
+	### Add your entity types here
+	#"zombie": preload("res://src/Assets/Definitions/Entities/Actors/entity_definition_zombie.tres"),
+	#"stimpak": preload("res://src/Assets/Definitions/Entities/Items/stimpak_definition.tres"),
+#}
 
 @export_category("Map Dimentions")
 @export var map_width: int = 90
