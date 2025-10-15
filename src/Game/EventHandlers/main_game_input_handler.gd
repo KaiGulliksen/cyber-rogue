@@ -13,6 +13,10 @@ const directions = {
 
 const inventory_menu_scene = preload("res://src/GUI/Inventory/Inventory.tscn")
 
+
+@export var reticle: Reticle
+
+
 func get_action(player: Entity) -> Action:
 	var action: Action = null
 	
@@ -32,7 +36,10 @@ func get_action(player: Entity) -> Action:
 		await show_inventory(player)
 		
 	if Input.is_action_just_pressed("pickup"):
-		action = PickupAction.new(player)	
+		action = PickupAction.new(player)
+		
+	if Input.is_action_just_pressed("look"):
+		await get_grid_position(player, 0)
 	
 	if Input.is_action_just_pressed("view_history"):
 		get_parent().transition_to(InputHandler.InputHandlers.HISTORY_VIEWER)
@@ -81,6 +88,7 @@ func _on_inventory_item_used(item: Entity, player: Entity) -> void:
 		if game and game.has_method("_handle_enemy_turns"):
 			game._handle_enemy_turns()
 
+
 func _on_inventory_item_dropped(item: Entity, player: Entity) -> void:
 	# Create drop action and perform it
 	var action = DropItemAction.new(player, item)
@@ -90,3 +98,11 @@ func _on_inventory_item_dropped(item: Entity, player: Entity) -> void:
 		var game = player.get_tree().get_root().get_node("InterfaceRoot/VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game")
 		if game and game.has_method("_handle_enemy_turns"):
 			game._handle_enemy_turns()
+
+
+func get_grid_position(player: Entity, radius: int) -> Vector2i:
+	get_parent().transition_to(InputHandler.InputHandlers.DUMMY)
+	var selected_position: Vector2i = await reticle.select_position(player, radius)
+	await get_tree().physics_frame
+	get_parent().call_deferred("transition_to", InputHandler.InputHandlers.MAIN_GAME)
+	return selected_position

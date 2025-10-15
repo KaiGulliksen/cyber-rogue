@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://k0xhib4wdaii"]
+[gd_scene load_steps=23 format=4 uid="uid://k0xhib4wdaii"]
 
 [ext_resource type="Script" uid="uid://ch6wx3vug6xc1" path="res://src/Game/game.gd" id="1_k6qo2"]
 [ext_resource type="Script" uid="uid://cub3popa4bn2e" path="res://src/Game/EventHandlers/input_handler.gd" id="2_le6wr"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://bu78jrrjoi8ca" path="res://src/Map/hub.gd" id="9_4te78"]
 [ext_resource type="Script" uid="uid://cmt06t0qnbo5h" path="res://src/GUI/hp_display.gd" id="9_mkl7w"]
 [ext_resource type="FontFile" uid="uid://bj0uxk1jeqvw2" path="res://src/Assets/Fonts/SourceCodePro-Regular.ttf" id="10_drysr"]
+[ext_resource type="PackedScene" uid="uid://bisb1o37p4pck" path="res://src/GUI/Reticle/reticle.tscn" id="10_muykf"]
 [ext_resource type="Script" uid="uid://ccd2lrlk7xh01" path="res://src/GUI/message_log.gd" id="11_drysr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4te78"]
@@ -101,8 +102,9 @@ script = ExtResource("1_k6qo2")
 [node name="InputHandler" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game"]
 script = ExtResource("2_le6wr")
 
-[node name="MainGameInputHandler" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/InputHandler"]
+[node name="MainGameInputHandler" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/InputHandler" node_paths=PackedStringArray("reticle")]
 script = ExtResource("3_sag4g")
+reticle = NodePath("../../EngineeringMap/Reticle")
 
 [node name="GameOverInputHandler" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/InputHandler"]
 script = ExtResource("3_7m6cs")
@@ -127,6 +129,8 @@ script = ExtResource("5_3s8ir")
 [node name="Tiles" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/EngineeringMap"]
 
 [node name="Entities" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/EngineeringMap"]
+
+[node name="Reticle" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/EngineeringMap" instance=ExtResource("10_muykf")]
 
 [node name="Hub" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game"]
 script = ExtResource("9_4te78")

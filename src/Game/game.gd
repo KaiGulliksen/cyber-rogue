@@ -24,15 +24,16 @@ func _ready() -> void:
 	player.add_child(camera)
 	
 	# Hide map initially
-	engineering_map.visible = false
+	#engineering_map.visible = false
 	
 	# Start in hub
 	hub.generate(player)
-	update_fov(player.grid_position)
+	#update_fov(player.grid_position)
 	MessageLog.send_message.bind(
 		"Hello and welcome, adventurer, to the hub!",
 		GameColors.WELCOME_TEXT
 	).call_deferred()
+	camera.make_current.call_deferred()
 
 
 func _physics_process(_delta: float) -> void:
@@ -88,3 +89,4 @@ func transition_to_dungeon() -> void:
 	
 	# Update FOV for new location
 	update_fov(player.grid_position)
+	camera.make_current.call_deferred()
