@@ -86,4 +86,5 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Press ESC to close"
+label_settings = SubResource("LabelSettings_kfanr")
 horizontal_alignment = 2
