@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 SignalBus="*res://src/Utils/signal_bus.gd"
 TileDB="*res://src/Map/tile_db.gd"
+NpcDB="*res://src/Entities/npc_db.gd"
+ItemDB="*res://src/Entities/item_db.gd"
 
 [display]
 

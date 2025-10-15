@@ -88,7 +88,6 @@ func _place_entities(dungeon: MapData, room: Rect2i) -> void:
 		var y: int = _rng.randi_range(room.position.y, room.position.y + room.size.y - 1)
 		var new_entity_position := Vector2i(x, y)
 		
-		# Additional bounds check
 		if not dungeon.is_in_bounds(new_entity_position):
 			continue
 		
@@ -99,11 +98,12 @@ func _place_entities(dungeon: MapData, room: Rect2i) -> void:
 				break
 		
 		if can_place:
-			var new_entity: Entity
-			if _rng.randf() < 0.4:
-				new_entity = Entity.new(dungeon, new_entity_position, entity_types.zombie)
-			else:
-				new_entity = Entity.new(dungeon, new_entity_position, entity_types.zombie)
+			# Use MonsterDB instead of local constant
+			var new_entity: Entity = Entity.new(
+				dungeon, 
+				new_entity_position, 
+				NpcDB.monsters[NpcDB.MonsterName.ZOMBIE]
+			)
 			dungeon.entities.append(new_entity)
 
 	# Place Items
@@ -113,10 +113,9 @@ func _place_entities(dungeon: MapData, room: Rect2i) -> void:
 			_rng.randi_range(room.position.x, room.position.x + room.size.x - 1),
 			_rng.randi_range(room.position.y, room.position.y + room.size.y - 1)
 		)
-		# Additional bounds check
+		
 		if not dungeon.is_in_bounds(pos):
 			continue
-		# Add item spawning logic here
 		
 		var can_place = true
 		for entity in dungeon.entities:
@@ -125,10 +124,13 @@ func _place_entities(dungeon: MapData, room: Rect2i) -> void:
 				break
 		
 		if can_place:
-			var new_entity: Entity = Entity.new(dungeon, pos, entity_types.stimpak)
+			# Use ItemDB instead of local constant
+			var new_entity: Entity = Entity.new(
+				dungeon, 
+				pos, 
+				ItemDB.items[ItemDB.ItemName.STIMPAK]
+			)
 			dungeon.entities.append(new_entity)
-
-		pass
 
 # The new Walker class
 class Walker:
