@@ -8,8 +8,10 @@
 [sub_resource type="Resource" id="Resource_t5i0r"]
 script = ExtResource("1_u16gx")
 max_hp = 30
-power = 4
-defense = 2
+strength = 10
+dexterity = 10
+armor = 10
+evasion = 10
 metadata/_custom_type_script = "uid://bktttlrow6lxq"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u16gx"]

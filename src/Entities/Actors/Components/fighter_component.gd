@@ -10,8 +10,10 @@ var hp: int:
 		hp_changed.emit(hp, max_hp)
 		if hp <= 0:
 			die()
-var defense: int
-var power: int
+var armor: int
+var evasion: int
+var strength: int
+var dexterity: int
 
 var death_texture: Texture
 var death_color: Color
@@ -20,8 +22,10 @@ var death_color: Color
 func _init(definition: FighterComponentDefinition) -> void:
 	max_hp = definition.max_hp
 	hp = definition.max_hp
-	defense = definition.defense
-	power = definition.power
+	armor = definition.armor
+	evasion = definition.evasion
+	strength = definition.strength
+	dexterity = definition.dexterity
 	death_texture = definition.death_texture
 	death_color = definition.death_color
 
