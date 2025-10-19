@@ -206,13 +206,11 @@ size_flags_horizontal = 3
 [node name="ArmorLabel" type="Label" parent="VBoxContainer/HBoxContainer/InfoBar/StatsPanel/VBoxContainer/CharacterInfoBox/CharacterInfoA"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 6
 label_settings = SubResource("LabelSettings_nwlnk")
 
 [node name="EvasionLabel" type="Label" parent="VBoxContainer/HBoxContainer/InfoBar/StatsPanel/VBoxContainer/CharacterInfoBox/CharacterInfoA"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 6
 label_settings = SubResource("LabelSettings_nwlnk")
 
 [node name="CharacterInfoB" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/InfoBar/StatsPanel/VBoxContainer/CharacterInfoBox"]
@@ -222,13 +220,11 @@ size_flags_horizontal = 3
 [node name="StrengthLabel" type="Label" parent="VBoxContainer/HBoxContainer/InfoBar/StatsPanel/VBoxContainer/CharacterInfoBox/CharacterInfoB"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 6
 label_settings = SubResource("LabelSettings_nwlnk")
 
 [node name="DexterityLabel" type="Label" parent="VBoxContainer/HBoxContainer/InfoBar/StatsPanel/VBoxContainer/CharacterInfoBox/CharacterInfoB"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 6
 label_settings = SubResource("LabelSettings_nwlnk")
 
 [node name="MessagesPanel" type="PanelContainer" parent="VBoxContainer"]

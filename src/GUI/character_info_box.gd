@@ -11,6 +11,7 @@ var _player: Entity
 
 
 func initialize(player: Entity) -> void:
+	await ready
 	_player = player
 	update_labels()
 	
