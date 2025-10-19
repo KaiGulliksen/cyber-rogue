@@ -1,11 +1,6 @@
 class_name DungeonGenerator
 extends Node
 
-#const entity_types = {
-	### Add your entity types here
-	#"zombie": preload("res://src/Assets/Definitions/Entities/Actors/entity_definition_zombie.tres"),
-	#"stimpak": preload("res://src/Assets/Definitions/Entities/Items/stimpak_definition.tres"),
-#}
 
 @export_category("Map Dimentions")
 @export var map_width: int = 90
@@ -18,7 +13,9 @@ extends Node
 @export var max_monsters_per_room: int = 1
 @export var max_items_per_room: int = 2
 
+
 var _rng := RandomNumberGenerator.new()
+
 
 func _ready() -> void:
 	_rng.randomize()

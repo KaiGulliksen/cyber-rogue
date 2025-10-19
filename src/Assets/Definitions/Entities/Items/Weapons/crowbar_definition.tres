@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EntityDefinition" load_steps=6 format=3 uid="uid://dhyufs6riakv6"]
+
+[ext_resource type="Script" uid="uid://b7h3aqbmlyth2" path="res://src/Entities/Actors/Components/ComponentDefinitions/equippable_component_definition.gd" id="1_may4g"]
+[ext_resource type="Script" uid="uid://b68okk0jd78d1" path="res://src/Entities/entity_definition.gd" id="2_xqgb5"]
+[ext_resource type="Texture2D" uid="uid://bqtva2dk4it0l" path="res://src/Assets/URLTileSet.png" id="3_ria55"]
+
+[sub_resource type="Resource" id="Resource_hn67i"]
+script = ExtResource("1_may4g")
+strength_bonus = 2
+weight = 1.0
+metadata/_custom_type_script = "uid://b7h3aqbmlyth2"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38oxf"]
+atlas = ExtResource("3_ria55")
+region = Rect2(240, 0, 16, 16)
+
+[resource]
+script = ExtResource("2_xqgb5")
+texture = SubResource("AtlasTexture_38oxf")
+is_blocking_movement = false
+item_definition = SubResource("Resource_hn67i")
+metadata/_custom_type_script = "uid://b68okk0jd78d1"

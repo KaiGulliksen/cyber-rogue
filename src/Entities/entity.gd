@@ -25,6 +25,7 @@ var map_data: MapData
 var fighter_component: FighterComponent
 var ai_component: BaseAIComponent
 var consumable_component: ConsumableComponent
+var equippable_component: EquippableComponent
 var inventory_component: InventoryComponent
 
 
@@ -51,11 +52,13 @@ func set_entity_type(entity_definition: EntityDefinition) -> void:
 	if entity_definition.fighter_definition:
 		fighter_component = FighterComponent.new(entity_definition.fighter_definition)
 		add_child(fighter_component)
-		
-	if entity_definition.item_definition:
-		if entity_definition.item_definition is HealingConsumableComponentDefinition:
-			consumable_component = HealingConsumableComponent.new(entity_definition.item_definition)
-			add_child(consumable_component)
+	
+	var item_definition: ItemComponentDefinition = entity_definition.item_definition	
+	if item_definition:
+		if item_definition is ConsumableComponentDefinition:
+			_handle_consumable(item_definition)
+		else:
+			equippable_component = EquippableComponent.new(item_definition)
 			
 	if entity_definition.inventory_capacity > 0:
 		inventory_component = InventoryComponent.new()
@@ -83,3 +86,12 @@ func get_entity_type() -> int:
 
 func is_alive() -> bool:
 	return ai_component != null
+
+
+func _handle_consumable(consumable_definition: ConsumableComponentDefinition) -> void:
+	if consumable_definition is HealingConsumableComponentDefinition:
+		consumable_component = HealingConsumableComponent.new(consumable_definition)
+
+	if consumable_component:
+		add_child(consumable_component)
+	consumable_component.entity = self

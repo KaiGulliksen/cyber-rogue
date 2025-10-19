@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="EntityDefinition" load_steps=6 format=3 uid="uid://c7ambvd7g6imd"]
+
+[ext_resource type="Script" uid="uid://b68okk0jd78d1" path="res://src/Entities/entity_definition.gd" id="1_cc05m"]
+[ext_resource type="Script" uid="uid://b7h3aqbmlyth2" path="res://src/Entities/Actors/Components/ComponentDefinitions/equippable_component_definition.gd" id="1_m8341"]
+[ext_resource type="Texture2D" uid="uid://bhibnw04nbann" path="res://src/Assets/monochrome_packed.png" id="3_j8sp3"]
+
+[sub_resource type="Resource" id="Resource_j8sp3"]
+script = ExtResource("1_m8341")
+equipment_type = 1
+armor_bonus = 2
+evasion_bonus = 2
+weight = 2.0
+metadata/_custom_type_script = "uid://b7h3aqbmlyth2"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtxs5"]
+atlas = ExtResource("3_j8sp3")
+region = Rect2(512, 16, 16, 16)
+
+[resource]
+script = ExtResource("1_cc05m")
+texture = SubResource("AtlasTexture_dtxs5")
+color = Color(0.25727764, 0.2571999, 0, 1)
+item_definition = SubResource("Resource_j8sp3")
+metadata/_custom_type_script = "uid://b68okk0jd78d1"

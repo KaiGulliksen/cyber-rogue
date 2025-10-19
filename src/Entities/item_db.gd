@@ -2,14 +2,16 @@ extends Node
 
 enum ItemName {
 	STIMPAK,
-	# Future items:
-	# GRENADE,
+	CROWBAR,
+	LEATHERJACKET,
 	# ARMOR,
 	# etc.
 }
 
 const items = {
-	ItemName.STIMPAK: preload("res://src/Assets/Definitions/Entities/Items/stimpak_definition.tres"),
+	ItemName.STIMPAK: preload("res://src/Assets/Definitions/Entities/Items/Consumables/stimpak_definition.tres"),
+	ItemName.CROWBAR: preload("res://src/Assets/Definitions/Entities/Items/Weapons/crowbar_definition.tres"),
+	ItemName.LEATHERJACKET: preload("res://src/Assets/Definitions/Entities/Items/Armor/leather_jacket_definition.tres"),
 }
 
 # Optional: Helper function for random loot
