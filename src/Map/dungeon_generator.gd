@@ -172,7 +172,7 @@ class Walker:
 	func walk(steps):
 		place_room(position)
 		for _i in range(steps):
-			if steps_since_turn >= 12:
+			if steps_since_turn >= 15:
 				change_direction()
 			
 			if step():
