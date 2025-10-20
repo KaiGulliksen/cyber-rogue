@@ -13,7 +13,7 @@ var current_state: GameState = GameState.HUB
 @onready var player: Entity
 @onready var input_handler: InputHandler = $InputHandler
 @onready var hub: Hub = $Hub
-@onready var engineering_map: EngineeringMap = $EngineeringMap
+@onready var maintenance_map: MaintenanceMap = $MaintenanceMap
 @onready var camera: Camera2D = $Camera2D
 
 
@@ -55,7 +55,7 @@ func get_map_data() -> MapData:
 	if current_state == GameState.HUB:
 		return hub.map_data
 	else:
-		return engineering_map.map_data
+		return maintenance_map.map_data
 
 
 func update_fov(player_position: Vector2i) -> void:
@@ -65,7 +65,7 @@ func update_fov(player_position: Vector2i) -> void:
 			entity.visible = true
 	else:
 		# In dungeon, use FOV
-		engineering_map.update_fov(player_position)
+		maintenance_map.update_fov(player_position)
 
 
 func transition_to_dungeon() -> void:
@@ -79,10 +79,10 @@ func transition_to_dungeon() -> void:
 	
 	# Hide hub, show map
 	hub.visible = false
-	engineering_map.visible = true
+	maintenance_map.visible = true
 	
 	# Generate dungeon
-	engineering_map.generate(player)
+	maintenance_map.generate(player)
 	
 	# Update state
 	current_state = GameState.DUNGEON

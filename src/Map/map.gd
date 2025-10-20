@@ -1,4 +1,4 @@
-class_name EngineeringMap
+class_name MaintenanceMap
 extends Node2D
 
 
@@ -7,7 +7,9 @@ signal dungeon_floor_changed(floor)
 
 @export var fov_radius: int = 8
 
+
 var map_data: MapData
+
 
 @onready var tiles: Node2D = $Tiles
 @onready var entities: Node2D = $Entities

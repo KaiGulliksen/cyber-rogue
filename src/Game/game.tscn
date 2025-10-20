@@ -114,7 +114,7 @@ script = ExtResource("2_le6wr")
 
 [node name="MainGameInputHandler" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/InputHandler" node_paths=PackedStringArray("reticle")]
 script = ExtResource("3_sag4g")
-reticle = NodePath("../../EngineeringMap/Reticle")
+reticle = NodePath("../../MaintenanceMap/Reticle")
 
 [node name="GameOverInputHandler" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/InputHandler"]
 script = ExtResource("3_7m6cs")
@@ -127,20 +127,20 @@ message_log_path = NodePath("../../../../../../MessagesPanel/MessageLog")
 [node name="DummyInputHandler" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/InputHandler"]
 script = ExtResource("6_x8pff")
 
-[node name="EngineeringMap" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game"]
+[node name="MaintenanceMap" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game"]
 script = ExtResource("3_bob6j")
 
-[node name="DungeonGenerator" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/EngineeringMap"]
+[node name="DungeonGenerator" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/MaintenanceMap"]
 script = ExtResource("4_bob6j")
 
-[node name="FieldOfView" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/EngineeringMap"]
+[node name="FieldOfView" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/MaintenanceMap"]
 script = ExtResource("5_3s8ir")
 
-[node name="Tiles" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/EngineeringMap"]
+[node name="Tiles" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/MaintenanceMap"]
 
-[node name="Entities" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/EngineeringMap"]
+[node name="Entities" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/MaintenanceMap"]
 
-[node name="Reticle" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/EngineeringMap" instance=ExtResource("10_muykf")]
+[node name="Reticle" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/MaintenanceMap" instance=ExtResource("10_muykf")]
 
 [node name="Hub" type="Node2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game"]
 script = ExtResource("9_4te78")
@@ -246,4 +246,4 @@ size_flags_horizontal = 3
 
 [connection signal="player_created" from="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game" to="VBoxContainer/HBoxContainer/InfoBar/StatsPanel/VBoxContainer/HpDisplay" method="initialize"]
 [connection signal="player_created" from="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game" to="VBoxContainer/HBoxContainer/InfoBar/StatsPanel/VBoxContainer/CharacterInfoBox" method="initialize"]
-[connection signal="dungeon_floor_changed" from="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/EngineeringMap" to="VBoxContainer/HBoxContainer/InfoBar/StatsPanel/VBoxContainer/DungeonFloorLabel" method="set_dungeon_floor"]
+[connection signal="dungeon_floor_changed" from="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/MaintenanceMap" to="VBoxContainer/HBoxContainer/InfoBar/StatsPanel/VBoxContainer/DungeonFloorLabel" method="set_dungeon_floor"]
