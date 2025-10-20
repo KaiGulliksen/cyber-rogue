@@ -8,7 +8,7 @@ const tile_size = 16
 
 enum GameState { HUB, DUNGEON }
 
-var current_state: GameState = GameState.HUB
+var current_state: GameState = GameState.DUNGEON
 
 @onready var player: Entity
 @onready var input_handler: InputHandler = $InputHandler
@@ -23,12 +23,12 @@ func _ready() -> void:
 	remove_child(camera)
 	player.add_child(camera)
 	
-	# Hide map initially
-	#engineering_map.visible = false
+	# Hide hub initially
+	hub.visible = false
 	
-	# Start in hub
-	hub.generate(player)
-	#update_fov(player.grid_position)
+	# Start in dungeon
+	maintenance_map.generate(player)
+	update_fov(player.grid_position)
 	MessageLog.send_message.bind(
 		"Hello and welcome, adventurer, to the hub!",
 		GameColors.WELCOME_TEXT
@@ -68,24 +68,24 @@ func update_fov(player_position: Vector2i) -> void:
 		maintenance_map.update_fov(player_position)
 
 
-func transition_to_dungeon() -> void:
+func transition_to_hub() -> void:
 	MessageLog.send_message(
-		"You descend into the dungeon...",
+		"You enter the hub...",
 		GameColors.WELCOME_TEXT
 	)
 	
-	# Remove player from hub
+	# Remove player from dungeon
 	player.get_parent().remove_child(player)
 	
-	# Hide hub, show map
-	hub.visible = false
-	maintenance_map.visible = true
+	# Hide dungeon, show hub
+	maintenance_map.visible = false
+	hub.visible = true
 	
-	# Generate dungeon
-	maintenance_map.generate(player)
+	# Generate hub
+	hub.generate(player)
 	
 	# Update state
-	current_state = GameState.DUNGEON
+	current_state = GameState.HUB
 	
 	# Update FOV for new location
 	update_fov(player.grid_position)

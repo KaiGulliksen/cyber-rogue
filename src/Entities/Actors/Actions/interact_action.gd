@@ -37,5 +37,5 @@ func _use_portal(portal: Entity) -> void:
 	# Get reference to Game node
 	var game_node = entity.get_tree().root.get_node("InterfaceRoot/VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game")
 	
-	if game_node and game_node.has_method("transition_to_dungeon"):
-		game_node.transition_to_dungeon()
+	if game_node and game_node.has_method("transition_to_hub"):
+		game_node.transition_to_hub()

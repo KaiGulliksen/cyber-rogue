@@ -8,6 +8,7 @@ extends Node
 
 @export_category("Dungeon Generation")
 @export var walk_iterations: int = 500
+@export var max_floors: int = 4
 
 @export_category("Entities RNG")
 @export var max_monsters_per_room: int = 1
@@ -65,12 +66,24 @@ func generate_dungeon(player: Entity, current_floor: int) -> MapData:
 	# The new walker creates rooms, we can use them to place entities.
 	_place_all_entities(dungeon, walker.rooms)
 	
-	dungeon.down_stair_location = last_room_center
-	var down_tile: Tile = dungeon.get_tile(last_room_center)
-	down_tile.set_tile_type(TileDB.TileName.DOWNSTAIR)
+	# Check if this is the final floor
+	if current_floor >= max_floors:
+		# Place portal instead of downstairs
+		dungeon.down_stair_location = last_room_center
+		_place_portal(dungeon, last_room_center)
+	else:
+		# Place downstairs normally
+		dungeon.down_stair_location = last_room_center
+		var down_tile: Tile = dungeon.get_tile(last_room_center)
+		down_tile.set_tile_type(TileDB.TileName.DOWNSTAIR)
 	
 	dungeon.setup_pathfinding()
 	return dungeon
+
+func _place_portal(dungeon: MapData, position: Vector2i) -> void:
+	const portal_definition: EntityDefinition = preload("res://src/Assets/Definitions/Entities/entity_definition_portal.tres")
+	var portal := Entity.new(dungeon, position, portal_definition)
+	dungeon.entities.append(portal)
 
 func _place_all_entities(dungeon: MapData, rooms: Array):
 	for room in rooms:
