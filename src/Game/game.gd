@@ -30,7 +30,7 @@ func _ready() -> void:
 	maintenance_map.generate(player)
 	update_fov(player.grid_position)
 	MessageLog.send_message.bind(
-		"Hello and welcome, adventurer, to the hub!",
+		"You wake up...",
 		GameColors.WELCOME_TEXT
 	).call_deferred()
 	camera.make_current.call_deferred()

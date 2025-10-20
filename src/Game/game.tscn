@@ -132,6 +132,7 @@ script = ExtResource("3_bob6j")
 
 [node name="DungeonGenerator" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/MaintenanceMap"]
 script = ExtResource("4_bob6j")
+max_floors = 2
 
 [node name="FieldOfView" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/MaintenanceMap"]
 script = ExtResource("5_3s8ir")
