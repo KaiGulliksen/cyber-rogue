@@ -17,7 +17,9 @@ region = Rect2(240, 0, 16, 16)
 
 [resource]
 script = ExtResource("2_xqgb5")
+name = "Crowbar"
 texture = SubResource("AtlasTexture_38oxf")
 is_blocking_movement = false
+type = 1
 item_definition = SubResource("Resource_hn67i")
 metadata/_custom_type_script = "uid://b68okk0jd78d1"

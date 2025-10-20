@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://k0xhib4wdaii"]
+[gd_scene load_steps=28 format=4 uid="uid://k0xhib4wdaii"]
 
 [ext_resource type="Script" uid="uid://ch6wx3vug6xc1" path="res://src/Game/game.gd" id="1_k6qo2"]
 [ext_resource type="Script" uid="uid://cub3popa4bn2e" path="res://src/Game/EventHandlers/input_handler.gd" id="2_le6wr"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://b7qwrg7urkx4m" path="res://src/Game/EventHandlers/base_input_handler.gd" id="6_x8pff"]
 [ext_resource type="Script" uid="uid://bu78jrrjoi8ca" path="res://src/Map/hub.gd" id="9_4te78"]
 [ext_resource type="Script" uid="uid://cmt06t0qnbo5h" path="res://src/GUI/hp_display.gd" id="9_mkl7w"]
+[ext_resource type="Resource" uid="uid://bnrbsucigf71" path="res://src/Assets/Definitions/LootTables/test.tres" id="9_nwlnk"]
 [ext_resource type="FontFile" uid="uid://bj0uxk1jeqvw2" path="res://src/Assets/Fonts/SourceCodePro-Regular.ttf" id="10_drysr"]
 [ext_resource type="PackedScene" uid="uid://bisb1o37p4pck" path="res://src/GUI/Reticle/reticle.tscn" id="10_muykf"]
 [ext_resource type="Script" uid="uid://ccd2lrlk7xh01" path="res://src/GUI/message_log.gd" id="11_drysr"]
@@ -132,6 +133,7 @@ script = ExtResource("3_bob6j")
 
 [node name="DungeonGenerator" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/MaintenanceMap"]
 script = ExtResource("4_bob6j")
+loot_table = ExtResource("9_nwlnk")
 
 [node name="FieldOfView" type="Node" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/Game/MaintenanceMap"]
 script = ExtResource("5_3s8ir")

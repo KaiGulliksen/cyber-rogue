@@ -19,7 +19,10 @@ region = Rect2(512, 16, 16, 16)
 
 [resource]
 script = ExtResource("1_cc05m")
+name = "Leather Jacket"
 texture = SubResource("AtlasTexture_dtxs5")
 color = Color(0.25727764, 0.2571999, 0, 1)
+is_blocking_movement = false
+type = 1
 item_definition = SubResource("Resource_j8sp3")
 metadata/_custom_type_script = "uid://b68okk0jd78d1"

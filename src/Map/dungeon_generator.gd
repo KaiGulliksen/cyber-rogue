@@ -14,6 +14,9 @@ extends Node
 @export var max_monsters_per_room: int = 1
 @export var max_items_per_room: int = 2
 
+@export_category("Loot Tables")
+@export var loot_table: LootTable
+
 
 var _rng := RandomNumberGenerator.new()
 
@@ -64,7 +67,7 @@ func generate_dungeon(player: Entity, current_floor: int) -> MapData:
 	player.map_data = dungeon
 	
 	# The new walker creates rooms, we can use them to place entities.
-	_place_all_entities(dungeon, walker.rooms)
+	_place_all_entities(dungeon, walker.rooms, current_floor)
 	
 	# Check if this is the final floor
 	if current_floor >= max_floors:
@@ -85,7 +88,7 @@ func _place_portal(dungeon: MapData, position: Vector2i) -> void:
 	var portal := Entity.new(dungeon, position, portal_definition)
 	dungeon.entities.append(portal)
 
-func _place_all_entities(dungeon: MapData, rooms: Array):
+func _place_all_entities(dungeon: MapData, rooms: Array, current_floor: int):
 	for room in rooms:
 		# Ensure room is within bounds
 		var room_rect = Rect2i(room.position, room.size)
@@ -95,10 +98,10 @@ func _place_all_entities(dungeon: MapData, rooms: Array):
 		room_rect.size.x = min(room_rect.size.x, map_width - room_rect.position.x)
 		room_rect.size.y = min(room_rect.size.y, map_height - room_rect.position.y)
 		
-		_place_entities(dungeon, room_rect)
+		_place_entities(dungeon, room_rect, current_floor)
 
 
-func _place_entities(dungeon: MapData, room: Rect2i) -> void:
+func _place_entities(dungeon: MapData, room: Rect2i, current_floor: int) -> void:
 	var monster_count = _rng.randi_range(0, max_monsters_per_room)
 	
 	for _i in monster_count:
@@ -124,7 +127,7 @@ func _place_entities(dungeon: MapData, room: Rect2i) -> void:
 			)
 			dungeon.entities.append(new_entity)
 
-	# Place Items
+	# Place Items using Loot Table
 	var item_count = _rng.randi_range(0, max_items_per_room)
 	for _i in item_count:
 		var pos = Vector2i(
@@ -141,14 +144,12 @@ func _place_entities(dungeon: MapData, room: Rect2i) -> void:
 				can_place = false
 				break
 		
-		if can_place:
-			# Use ItemDB instead of local constant
-			var new_entity: Entity = Entity.new(
-				dungeon, 
-				pos, 
-				ItemDB.items[ItemDB.ItemName.STIMPAK]
-			)
-			dungeon.entities.append(new_entity)
+		if can_place and loot_table:
+			# Use loot table to determine item
+			var item_definition = loot_table.get_random_item_for_floor(current_floor, _rng)
+			if item_definition:
+				var new_entity: Entity = Entity.new(dungeon, pos, item_definition)
+				dungeon.entities.append(new_entity)
 
 # The new Walker class
 class Walker:
