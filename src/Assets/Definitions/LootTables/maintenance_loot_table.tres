@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LootTable" load_steps=10 format=3 uid="uid://cc4tkqpdh6fph"]
+[gd_resource type="Resource" script_class="LootTable" load_steps=12 format=3 uid="uid://cc4tkqpdh6fph"]
 
 [ext_resource type="Script" uid="uid://bpwioim3yv81f" path="res://src/Map/loot_entry.gd" id="1_y1x00"]
 [ext_resource type="Script" uid="uid://b68okk0jd78d1" path="res://src/Entities/entity_definition.gd" id="2_g50di"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://lrwcxa168gqf" path="res://src/Map/loot_table.gd" id="3_3y0mb"]
 [ext_resource type="Resource" uid="uid://dhyufs6riakv6" path="res://src/Assets/Definitions/Entities/Items/Weapons/crowbar_definition.tres" id="3_ukp0f"]
 [ext_resource type="Resource" uid="uid://c7ambvd7g6imd" path="res://src/Assets/Definitions/Entities/Items/Armor/leather_jacket_definition.tres" id="4_al404"]
+[ext_resource type="Resource" uid="uid://cqh6mku4w4r2t" path="res://src/Assets/Definitions/Entities/Items/Weapons/shiv_definition.tres" id="5_ukp0f"]
 
 [sub_resource type="Resource" id="Resource_d7g1p"]
 script = ExtResource("1_y1x00")
@@ -30,7 +31,13 @@ min_floor = 2
 tags = Array[String](["armor", "body"])
 metadata/_custom_type_script = "uid://bpwioim3yv81f"
 
+[sub_resource type="Resource" id="Resource_al404"]
+script = ExtResource("1_y1x00")
+item = ExtResource("5_ukp0f")
+spawn_chance = 30.0
+metadata/_custom_type_script = "uid://bpwioim3yv81f"
+
 [resource]
 script = ExtResource("3_3y0mb")
-entries = Array[ExtResource("1_y1x00")]([SubResource("Resource_d7g1p"), SubResource("Resource_q4xiw"), SubResource("Resource_7fmx8")])
+entries = Array[ExtResource("1_y1x00")]([SubResource("Resource_d7g1p"), SubResource("Resource_q4xiw"), SubResource("Resource_7fmx8"), SubResource("Resource_al404")])
 metadata/_custom_type_script = "uid://lrwcxa168gqf"

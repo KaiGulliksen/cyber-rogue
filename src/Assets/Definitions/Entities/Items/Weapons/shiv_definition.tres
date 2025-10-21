@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="EntityDefinition" load_steps=6 format=3 uid="uid://cqh6mku4w4r2t"]
+
+[ext_resource type="Script" uid="uid://b7h3aqbmlyth2" path="res://src/Entities/Actors/Components/ComponentDefinitions/equippable_component_definition.gd" id="1_utc26"]
+[ext_resource type="Script" uid="uid://b68okk0jd78d1" path="res://src/Entities/entity_definition.gd" id="2_le7bv"]
+[ext_resource type="Texture2D" uid="uid://bhibnw04nbann" path="res://src/Assets/monochrome_packed.png" id="3_us5g3"]
+
+[sub_resource type="Resource" id="Resource_r1ws4"]
+script = ExtResource("1_utc26")
+strength_bonus = 1
+evasion_bonus = 1
+weight = 0.4
+item_rating = 1
+metadata/_custom_type_script = "uid://b7h3aqbmlyth2"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m17kt"]
+atlas = ExtResource("3_us5g3")
+region = Rect2(544, 96, 16, 16)
+
+[resource]
+script = ExtResource("2_le7bv")
+name = "Shiv"
+texture = SubResource("AtlasTexture_m17kt")
+color = Color(0.49354547, 0.49354553, 0.49354553, 1)
+is_blocking_movement = false
+type = 1
+item_definition = SubResource("Resource_r1ws4")
+metadata/_custom_type_script = "uid://b68okk0jd78d1"
