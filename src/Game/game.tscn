@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://b7qwrg7urkx4m" path="res://src/Game/EventHandlers/base_input_handler.gd" id="6_x8pff"]
 [ext_resource type="Script" uid="uid://bu78jrrjoi8ca" path="res://src/Map/hub.gd" id="9_4te78"]
 [ext_resource type="Script" uid="uid://cmt06t0qnbo5h" path="res://src/GUI/hp_display.gd" id="9_mkl7w"]
-[ext_resource type="Resource" uid="uid://bnrbsucigf71" path="res://src/Assets/Definitions/LootTables/test.tres" id="9_nwlnk"]
+[ext_resource type="Resource" uid="uid://cc4tkqpdh6fph" path="res://src/Assets/Definitions/LootTables/maintenance_loot_table.tres" id="9_nwlnk"]
 [ext_resource type="FontFile" uid="uid://bj0uxk1jeqvw2" path="res://src/Assets/Fonts/SourceCodePro-Regular.ttf" id="10_drysr"]
 [ext_resource type="PackedScene" uid="uid://bisb1o37p4pck" path="res://src/GUI/Reticle/reticle.tscn" id="10_muykf"]
 [ext_resource type="Script" uid="uid://ccd2lrlk7xh01" path="res://src/GUI/message_log.gd" id="11_drysr"]

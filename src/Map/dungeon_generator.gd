@@ -16,6 +16,7 @@ extends Node
 
 @export_category("Loot Tables")
 @export var loot_table: LootTable
+@export var boss_loot_table: LootTable  # Optional: special loot for final floor
 
 
 var _rng := RandomNumberGenerator.new()
@@ -74,6 +75,10 @@ func generate_dungeon(player: Entity, current_floor: int) -> MapData:
 		# Place portal instead of downstairs
 		dungeon.down_stair_location = last_room_center
 		_place_portal(dungeon, last_room_center)
+		
+		# Optional: Place guaranteed boss loot
+		if boss_loot_table:
+			_place_boss_loot(dungeon, last_room_center, current_floor)
 	else:
 		# Place downstairs normally
 		dungeon.down_stair_location = last_room_center
@@ -87,6 +92,21 @@ func _place_portal(dungeon: MapData, position: Vector2i) -> void:
 	const portal_definition: EntityDefinition = preload("res://src/Assets/Definitions/Entities/entity_definition_portal.tres")
 	var portal := Entity.new(dungeon, position, portal_definition)
 	dungeon.entities.append(portal)
+
+
+func _place_boss_loot(dungeon: MapData, portal_pos: Vector2i, current_floor: int) -> void:
+	# Place rare loot near the portal
+	var item_def = boss_loot_table.get_guaranteed_item(LootEntry.Rarity.RARE, current_floor, _rng)
+	if item_def:
+		# Find nearby empty spot
+		var offsets = [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]
+		for offset in offsets:
+			var pos = portal_pos + offset
+			if dungeon.is_in_bounds(pos) and not dungeon.get_blocking_entity_at_location(pos):
+				var item := Entity.new(dungeon, pos, item_def)
+				dungeon.entities.append(item)
+				break
+
 
 func _place_all_entities(dungeon: MapData, rooms: Array, current_floor: int):
 	for room in rooms:
