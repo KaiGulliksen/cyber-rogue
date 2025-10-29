@@ -14,14 +14,13 @@ offset_left = -10000.0
 offset_top = -10000.0
 offset_right = 10000.0
 offset_bottom = 10000.0
-color = Color(0.1, 0.1, 0.15, 1)
+color = Color(0, 0, 0, 1)
 
 [node name="DungeonGenerator" type="Node" parent="."]
 script = ExtResource("2_dungeon_gen")
 map_width = 60
 map_height = 60
 max_room_size = 16
-max_depth = 4
 
 [node name="UI" type="CanvasLayer" parent="."]
 
