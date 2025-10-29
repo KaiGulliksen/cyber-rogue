@@ -14,10 +14,6 @@ extends Node
 @export var max_monsters_per_room: int = 1
 @export var max_items_per_room: int = 2
 
-@export_category("Loot Tables")
-@export var loot_table: LootTable
-@export var boss_loot_table: LootTable  # Optional: special loot for final floor
-
 
 var _rng := RandomNumberGenerator.new()
 
@@ -74,11 +70,7 @@ func generate_dungeon(player: Entity, current_floor: int) -> MapData:
 	if current_floor >= max_floors:
 		# Place portal instead of downstairs
 		dungeon.down_stair_location = last_room_center
-		_place_portal(dungeon, last_room_center)
 		
-		# Optional: Place guaranteed boss loot
-		if boss_loot_table:
-			_place_boss_loot(dungeon, last_room_center, current_floor)
 	else:
 		# Place downstairs normally
 		dungeon.down_stair_location = last_room_center
@@ -87,25 +79,6 @@ func generate_dungeon(player: Entity, current_floor: int) -> MapData:
 	
 	dungeon.setup_pathfinding()
 	return dungeon
-
-func _place_portal(dungeon: MapData, position: Vector2i) -> void:
-	const portal_definition: EntityDefinition = preload("res://src/Assets/Definitions/Entities/entity_definition_portal.tres")
-	var portal := Entity.new(dungeon, position, portal_definition)
-	dungeon.entities.append(portal)
-
-
-func _place_boss_loot(dungeon: MapData, portal_pos: Vector2i, current_floor: int) -> void:
-	# Place rare loot near the portal
-	var item_def = boss_loot_table.get_guaranteed_item(LootEntry.Rarity.RARE, current_floor, _rng)
-	if item_def:
-		# Find nearby empty spot
-		var offsets = [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]
-		for offset in offsets:
-			var pos = portal_pos + offset
-			if dungeon.is_in_bounds(pos) and not dungeon.get_blocking_entity_at_location(pos):
-				var item := Entity.new(dungeon, pos, item_def)
-				dungeon.entities.append(item)
-				break
 
 
 func _place_all_entities(dungeon: MapData, rooms: Array, current_floor: int):
@@ -146,30 +119,6 @@ func _place_entities(dungeon: MapData, room: Rect2i, current_floor: int) -> void
 				NpcDB.monsters[NpcDB.MonsterName.ZOMBIE]
 			)
 			dungeon.entities.append(new_entity)
-
-	# Place Items using Loot Table
-	var item_count = _rng.randi_range(0, max_items_per_room)
-	for _i in item_count:
-		var pos = Vector2i(
-			_rng.randi_range(room.position.x, room.position.x + room.size.x - 1),
-			_rng.randi_range(room.position.y, room.position.y + room.size.y - 1)
-		)
-		
-		if not dungeon.is_in_bounds(pos):
-			continue
-		
-		var can_place = true
-		for entity in dungeon.entities:
-			if entity.grid_position == pos:
-				can_place = false
-				break
-		
-		if can_place and loot_table:
-			# Use loot table to determine item
-			var item_definition = loot_table.get_random_item_for_floor(current_floor, _rng)
-			if item_definition:
-				var new_entity: Entity = Entity.new(dungeon, pos, item_definition)
-				dungeon.entities.append(new_entity)
 
 # The new Walker class
 class Walker:

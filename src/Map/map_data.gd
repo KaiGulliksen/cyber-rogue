@@ -4,11 +4,6 @@ extends RefCounted
 
 signal entity_placed(entity)
 
-#const tile_types = {
-	#"floor": preload("res://src/Assets/Definitions/Tiles/tile_definition_floor.tres"),
-	#"wall": preload("res://src/Assets/Definitions/Tiles/tile_definition_wall.tres"),
-#}
-
 
 const entity_pathfinding_weight = 10.0
 

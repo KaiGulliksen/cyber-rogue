@@ -27,9 +27,6 @@ func get_action(player: Entity) -> Action:
 	
 	if Input.is_action_just_pressed("wait"):
 		action = WaitAction.new(player)
-	
-	if Input.is_action_just_pressed("interact"):
-		action = InteractAction.new(player)
 		
 	if Input.is_action_just_pressed("inventory"):
 		await show_inventory(player)
