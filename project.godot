@@ -27,6 +27,17 @@ ItemDB="*res://src/Entities/item_db.gd"
 window/size/viewport_width=1600
 window/size/viewport_height=1000
 
+[file_customization]
+
+folder_colors={
+"res://src/Assets/": "red",
+"res://src/Entities/": "pink",
+"res://src/GUI/": "blue",
+"res://src/Game/": "green",
+"res://src/Map/": "yellow",
+"res://src/Utils/": "gray"
+}
+
 [input]
 
 move_up={

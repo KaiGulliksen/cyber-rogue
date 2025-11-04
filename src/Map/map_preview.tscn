@@ -20,7 +20,9 @@ color = Color(0, 0, 0, 1)
 script = ExtResource("2_dungeon_gen")
 map_width = 60
 map_height = 60
-max_room_size = 16
+max_room_size = 20
+min_partition_size = 15
+corridor_width = 1
 
 [node name="UI" type="CanvasLayer" parent="."]
 
